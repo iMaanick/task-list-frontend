@@ -31,3 +31,27 @@ ul {
     justify-content: space-between;
     gap: 6px;
 }
+.task-description {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 8px;
+}
+.TaskInnerWrapper {
+    display: flex;
+    justify-content: space-between;  /* Размещение элементов по бокам */
+    align-items: center;
+    width: 100%;
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.task-description {
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 20px;
+    flex-grow: 1;
+}

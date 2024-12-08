@@ -7,37 +7,35 @@ interface AddTaskProps {
     loading?: boolean;
 }
 
-const AddTask: React.FC<AddTaskProps> = ({ onAdd, loading}) => {
-    const [title, setTitle] = useState('');  // State to keep track of the task title input
+const AddTask: React.FC<AddTaskProps> = ({ onAdd, loading }) => {
+    const [title, setTitle] = useState('');  // Стейт для заголовка
+    const [description, setDescription] = useState('');  // Стейт для описания
 
-    // Function to handle form submission
+    // Функция для отправки данных
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();  // Prevent the default form submission behavior
-        if (!title) return;  // If the title is empty, do nothing
-        onAdd(title);
-        setTitle('');
-    };
-
-    // Function to handle Enter key press in the input field
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') { 
-            handleSubmit(e);  
-        }
+        e.preventDefault();  // Отменить стандартное поведение формы
+        if (!title || !description) return;  // Если нет title или description, не добавляем задачу
+        onAdd({ title, description });  // Отправка задачи с title и description
+        setTitle('');  // Очистка полей после добавления задачи
+        setDescription('');
     };
 
     return (
         <form className="addTask" onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            value={title} 
-            onChange={(e) => setTitle(e.target.value)}  
-            onKeyDown={handleKeyDown}  
-            placeholder="New task"
-            disabled={loading}
-          />
-            <button type="submit">
-                {loading ? <Spinner />:"Add"}
-            </button>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="New task title"
+                disabled={loading}
+            />
+            <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Task description"
+                disabled={loading}
+            />
+            <button type="submit">{loading ? <Spinner /> : "Add"}</button>
         </form>
     );
 };

@@ -9,9 +9,11 @@ import "./App.scss";
 type TaskType = {
   id: number;
   title: string;
+  description: string;  // Добавлено описание
   completed: boolean;
   position: number;
 };
+
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -58,30 +60,30 @@ const App: React.FC = () => {
     fetchTasks();
   }, []);
 
-  const handleAddTask = async (title: string) => {
+const handleAddTask = async ({ title, description }: { title: string, description: string }) => {
     setAddTaskLoading(true);
     try {
-      const newTask = await addTask(title);
-      setTasks([newTask, ...tasks]);
+        const newTask = await addTask(title, description);
+        setTasks([newTask, ...tasks]);
     } catch (error) {
-      console.error('Error adding task:', error);
+        console.error('Error adding task:', error);
     } finally {
-      setAddTaskLoading(false);
+        setAddTaskLoading(false);
     }
-  };
+};
 
-  async function addTask(title: string) {
+async function addTask(title: string, description: string) {
     setAddTaskLoading(true);
     const response = await fetch("http://localhost:8000/tasks/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ title }),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ title, description }),  // Отправка description
     });
     return response.json();
-  }
+}
 
   const handleToggleCompleted = async (id: number) => {
     const task = tasks.find((task) => task.id === id);

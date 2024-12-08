@@ -30,7 +30,6 @@ const Task: React.FC<TaskProps> = ({ task, onDelete, onToggleCompleted, onUpdate
         }
     }, [debouncedTitle, task.id, task.title, onUpdateTitle]);
 
-
     return (
         <Reorder.Item
             value={task}
@@ -41,7 +40,7 @@ const Task: React.FC<TaskProps> = ({ task, onDelete, onToggleCompleted, onUpdate
             className="Task"
         >
             <span className='TaskInnerWrapper'>
-                <div>
+                <div className="task-content">
                     <span
                         className="reorder-handle"
                         onPointerDown={(e) => controls.start(e)}
@@ -49,9 +48,9 @@ const Task: React.FC<TaskProps> = ({ task, onDelete, onToggleCompleted, onUpdate
                         &#9776;
                     </span>
                     <input type="checkbox" checked={task.completed} onChange={() => onToggleCompleted(task.id)} />
-                    <input value={title} onChange={(e)=>{
-                        setTitle(e.target.value)
-                    }} />
+                    <input value={title} onChange={(e) => setTitle(e.target.value)} />
+                    {/* Описание задачи справа от заголовка */}
+                    <p className="task-description">{task.description}</p>
                 </div>
                 <DeleteBtn onDelete={onDelete} id={task.id} />
             </span>
