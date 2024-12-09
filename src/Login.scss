@@ -3,8 +3,15 @@
   color: white;
   padding: 30px;
   width: 300px;
-  margin: 0 auto;
   border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .login__title {
@@ -38,14 +45,16 @@
 }
 
 .login__auth-button {
-  width: 100%;
+  width: 110%;
   padding: 10px;
   background-color: #f7b42c;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
+
 
 .login__auth-button:hover {
   background-color: #f68a1d;

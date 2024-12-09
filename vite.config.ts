@@ -9,8 +9,8 @@ export default defineConfig({
     },
   },
   server: {
-    host: "localhost", // Указывает на localhost
-    port: 3000, // Указывает порт, на котором будет запускаться сервер
-    strictPort: true, // Обеспечивает использование именно указанного порта
+    host: '0.0.0.0',
+    port: 3000,
+    strictPort: true,
   },
 });

@@ -9,7 +9,7 @@ import "./App.scss";
 type TaskType = {
   id: number;
   title: string;
-  description: string;  // Добавлено описание
+  description: string;
   completed: boolean;
   position: number;
 };
@@ -24,9 +24,9 @@ const App: React.FC = () => {
     try {
       await fetch("http://localhost:8000/auth/jwt/logout", {
         method: "POST",
-        credentials: "include", // Отправить куки для завершения сессии
+        credentials: "include",
       });
-      navigate("/login"); // Перенаправить на страницу логина
+      navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -80,7 +80,7 @@ async function addTask(title: string, description: string) {
             "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ title, description }),  // Отправка description
+        body: JSON.stringify({ title, description }),
     });
     return response.json();
 }
@@ -171,7 +171,7 @@ async function addTask(title: string, description: string) {
   return (
     <div id="App">
       <div id="MainWrapper">
-        {/* Навбар */}
+        {}
         <header className="navbar">
           <h1 className="navbar__title">Task Manager</h1>
           <button className="navbar__logout" onClick={handleLogout}>
